@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -laR | find -type df -empty
+find -empty | rev | cut -d'/' -f1 | rev
