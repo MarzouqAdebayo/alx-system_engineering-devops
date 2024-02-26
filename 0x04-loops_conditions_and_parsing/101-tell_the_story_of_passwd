@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Display the files in current directory
+
+file="/etc/passwd"
+while IFS=: read -r -a fields
+do
+	username="${fields[0]}"
+	password="${fields[1]}"
+	userid="${fields[2]}"
+	groupid="${fields[3]}"
+	userIdInfo="${fields[4]}"
+	homedir="${fields[5]}"
+	command="${fields[6]}"
+	echo "The user ${username} is part of the ${groupid} gang, lives in ${homedir} and rides ${command}. ${userid}'s place is protected by the passcode ${password}, more info about the user here: ${userIdInfo}"
+done < "$file"
