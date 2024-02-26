@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Parses apache server logs
+awk 'BEGIN { FS=" " } NR { print $1, $9 }' ./apache-access.log
