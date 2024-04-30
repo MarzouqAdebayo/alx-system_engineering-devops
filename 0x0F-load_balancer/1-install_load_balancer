@@ -1,0 +1,21 @@
+#!/bin/bash
+# Installs and configures HAproxy on lb-01 server.
+
+sudo apt-get update
+sudo apt-get install -y haproxy
+
+sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg-default
+
+printf "
+listen load-balance
+    bind :80
+    bind :8080
+    mode http
+    balance roundrobin
+    option httpchk HEAD / HTTP/1.1\\r\\nHost:\\ localhost
+    option forwardfor
+    server 217836-web-01 54.242.192.138 check port 80
+    server 217836-web-02 3.90.85.81 check port 80
+" >> /etc/haproxy/haproxy.cfg
+
+sudo service haproxy restart
