@@ -40,6 +40,7 @@ frontend www-http
 	bind *:80
 	reqadd X-Forwarded-Proto:\ http
 	default_backend www-backend-http
+	redirect scheme https if !{ ssl_fc }
 
 frontend www-https
 	bind *:443 ssl crt /etc/letsencrypt/live/www.marzouq.tech/fullchain.pem
@@ -48,5 +49,6 @@ frontend www-https
 
 backend www-backend-http
 	balance roundrobin
+	redirect scheme https if !{ ssl_fc }
 	server 217836-web-01 54.242.192.138:80 check
 	server 217836-web-02 3.90.85.81:80 check
