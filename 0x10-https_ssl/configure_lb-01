@@ -1,0 +1,12 @@
+#!/bin/bash
+# Installs and configures HAproxy on lb-01 server.
+
+sudo apt-get update
+sudo apt-get install -y haproxy
+
+sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg-default
+file=cat ./1-haproxy_ssl_termination
+
+printf $file > /etc/haproxy/haproxy.cfg
+
+sudo service haproxy restart

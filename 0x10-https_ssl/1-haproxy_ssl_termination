@@ -44,14 +44,9 @@ frontend www-http
 frontend www-https
 	bind *:443 ssl crt /etc/letsencrypt/live/www.marzouq.tech/fullchain.pem
 	reqadd X-Forwarded-Proto:\ https
-	default_backend www-backend-https
+	default_backend www-backend-http
 
 backend www-backend-http
 	balance roundrobin
-	server 217836-web-01 54.242.192.138 check
-	server 217836-web-02 3.90.85.81 check
-
-backend www-backend-https
-	balance roundrobin
-	server 217836-web-01 54.242.192.138 check
-	server 217836-web-02 3.90.85.81 check
+	server 217836-web-01 54.242.192.138:80 check
+	server 217836-web-02 3.90.85.81:80 check
