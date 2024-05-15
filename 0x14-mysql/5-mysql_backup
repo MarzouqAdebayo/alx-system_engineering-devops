@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# Create mysql database backup using mysqldump and compresses it
 
 # Set variables
 PASSWORD="$1"
