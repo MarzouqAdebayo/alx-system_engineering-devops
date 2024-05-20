@@ -6,7 +6,7 @@ Uses the JSON placeholder api to query data about an employee
 from requests import get
 from sys import argv
 
-if __name__ = "__main__":
+if __name__ == "__main__":
     user_id = argv[1]
     endpoint = 'https://jsonplaceholder.typicode.com'
     todo_path = f'endpoint/user/{user_id}/todos'
