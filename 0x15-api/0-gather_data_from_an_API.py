@@ -12,7 +12,7 @@ if __name__ == "__main__":
     todo_path = f'{endpoint}/user/{user_id}/todos'
     user_path = f'{endpoint}/users/{user_id}'
     todo_path_output = get(todo_path).json()
-    user_path_output = get(todo_user).json()
+    user_path_output = get(user_path).json()
 
     total_todo = len(todo_path_output)
     completed_todo = len([todo for todo in todo_path_output
