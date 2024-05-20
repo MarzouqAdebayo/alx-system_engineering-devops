@@ -9,8 +9,8 @@ from sys import argv
 if __name__ == "__main__":
     user_id = argv[1]
     endpoint = 'https://jsonplaceholder.typicode.com'
-    todo_path = f'endpoint/user/{user_id}/todos'
-    user_path = f'endpoint/users/{user_id}'
+    todo_path = f'{endpoint}/user/{user_id}/todos'
+    user_path = f'{endpoint}/users/{user_id}'
     todo_path_output = get(todo_path).json()
     user_path_output = get(todo_user).json()
 
