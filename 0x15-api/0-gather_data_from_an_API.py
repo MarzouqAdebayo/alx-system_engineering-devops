@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """
+Module "0-gather_data_from_an_API"
 Uses the JSON placeholder api to query data about an employee
 """
-
 from requests import get
 from sys import argv
 
