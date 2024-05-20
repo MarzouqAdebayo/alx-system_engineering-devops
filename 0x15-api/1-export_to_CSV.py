@@ -6,7 +6,7 @@ from csv import DictWriter, QUOTE_ALL
 from requests import get
 from sys import argv
 
-if __name__ = "__main__":
+if __name__ == "__main__":
     user_id = argv[1]
     endpoint = 'https://jsonplaceholder.typicode.com'
     todo_path = f'endpoint/user/{user_id}/todos'
