@@ -16,9 +16,10 @@ def top_ten(subreddit):
         if response.status_code == 200:
             data = response.json()
             children = data.get('data').get('children')
-            for i in range(10):
-                print(children[i].get('data').get('title'))
+            for item in children:
+                print(item.get('data').get('title'))
         else:
             print("None")
     except Exception:
         print("None")
+
