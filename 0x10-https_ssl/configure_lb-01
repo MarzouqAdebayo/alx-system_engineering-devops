@@ -1,6 +1,7 @@
 #!/bin/bash
 # Installs and configures HAproxy on lb-01 server.
 
+# sudo certbot certonly --standalone --preferred-challenges http --http-01-port 80 -d marzouq.tech -d www.marzouq.tech
 sudo apt-get update
 sudo apt-get install -y haproxy
 
@@ -10,3 +11,4 @@ file=cat ./1-haproxy_ssl_termination
 printf $file > /etc/haproxy/haproxy.cfg
 
 sudo service haproxy restart
+

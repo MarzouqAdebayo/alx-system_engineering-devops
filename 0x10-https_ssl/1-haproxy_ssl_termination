@@ -48,5 +48,5 @@ frontend www-https
 
 backend www-backend-http
 	balance roundrobin
-	server 217836-web-01 54.242.192.138:80 check
-	server 217836-web-02 3.90.85.81:80 check
+	server 217836-web-01 54.90.56.152:80 check
+	server 217836-web-02 18.208.120.166:80 check

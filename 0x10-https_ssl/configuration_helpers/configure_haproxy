@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Installs and configures HAproxy on lb-01 server.
+
+# sudo apt-get install -y certbot
+# sudo certbot certonly --standalone --preferred-challenges http --http-01-port 80 -d marzouq.tech -d www.marzouq.tech
+
+sudo apt-get update
+sudo apt-get install -y haproxy
+
+sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg-default
+
+server1="server 217836-web-01 54.90.56.152:80 check"
+server2="server 217836-web-02 18.208.120.166:80 check"
+
+DOMAIN="marzouq.tech"
+ssl_cert="/etc/letsencrypt/live/$DOMAIN/fullchain.pem"
+ssl_key="/etc/letsencrypt/live/$DOMAIN/privkey.pem"
+cert_location="/etc/haproxy/certs/$DOMAIN.pem"
+
+sudo bash -c "mkdir -p /etc/haproxy/certs"
+sudo bash -c "cat $ssl_cert $ssl_key > $cert_location"
+
+frontend="frontend www-http\n\tbind *:80\n\thttp-request add-header X-Forwarded-Proto:\ http\n\tdefault_backend www-backend-http\n"
+frontend_secure="frontend www-https\n\tbind *:443 ssl crt $cert_location\n\thttp-request add-header X-Forwarded-Proto:\ https\n\tdefault_backend www-backend-http\n"
+backend="backend www-backend-http\n\tbalance roundrobin\n\t$server1\n\t$server2"
+
+sudo sed -i "$ a $frontend" /etc/haproxy/haproxy.cfg
+sudo sed -i "$ a $frontend_secure" /etc/haproxy/haproxy.cfg
+sudo sed -i "$ a $backend" /etc/haproxy/haproxy.cfg
+
+sudo service haproxy restart
